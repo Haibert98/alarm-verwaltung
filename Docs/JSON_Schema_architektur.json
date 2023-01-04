@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "email",
+    "vorname",
+    "nachname",
+    "geburtsdatum",
+    "strasse",
+    "hausnummer",
+    "plz",
+    "ort"
+  ],
+  "properties": {
+    "email": {
+      "type": "string",
+      "pattern": ".+\\@.+\\..+",
+      "description": "email Benutzer"      
+    },
+    "vorname": {
+      "type": "string"
+    },
+    "nachname": {
+      "type": "string"
+    },
+    "geburtsdatum": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 10,
+      "pattern": "[0-9]?[1-9][.][0-9]?[1-9][.][1-9][0-9]{3}",
+      "description": "TT.MM.JJJJ oder T.M.JJJJ"
+    },
+    "strasse": {
+      "type": "string"
+    },
+    "hausnummer": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5,
+      "pattern": "[0-9]{1,4}[a-z]?",
+      "description": "zwischen 1 und 9999z"
+    },
+    "plz": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 5,
+      "pattern": "[0-9]{5}"
+    },
+    "ort": {
+      "type": "string"
+    },
+    "ortsteil": {
+      "type": "string",
+      "description": "muss nicht immer zutreffen"
+    },
+    "stockwerk": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 5,
+      "description": "x.UG, EG, xx.OG"
+    },
+    "fahrstuhl": {
+      "type": "boolean",
+      "description": "true=fahrstuhl vorhanden"
+    },
+    "personenzustand": {
+      "type": "boolean",
+      "description": "true bei Bewusstsein. false wenn bewusstlos"
+    },
+    "allergien": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "eg. Nussallergie"
+      }
+    },
+    "vorerkrangungen": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "eg. Parkinson"
+      }
+    },
+    "medikation": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Medikament morgens und abends eg. aspirin 20mg_1-0-1"
+      }
+    },
+    "krankenkasse": {
+      "type": "string"
+    },
+    "versichertennummer": {
+      "type": "string"
+    },
+    "gewicht": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 500,
+      "description": "in kg"
+    },
+    "groesse": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 250,
+      "description": "in cm"
+    },
+    "position": {
+      "type": "string",
+      "description": "Sub-Ordner vom Pfad: /home/projectuser/projectlp/"
+    },
+    "bild": {
+      "type": "string",
+      "description": "Sub-Ordner vom Pfad: /home/projectuser/projectlp/"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "email",
+    "doorCode"
+  ],
+  "properties": {
+    "email": {
+      "type": "string",
+      "pattern": ".+\\@.+\\..+",
+      "description": "email Benutzer"       
+    },
+    "doorCode": {
+      "type": "string",
+      "description": ".-.-...-."
+    }
+  }
+}

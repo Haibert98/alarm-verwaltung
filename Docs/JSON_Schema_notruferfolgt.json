@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "email",
+    "status"
+  ],
+  "properties": {
+    "email": {
+      "type": "string",
+      "pattern": ".+\\@.+\\..+",
+      "description": "unique id pro Notfall"
+    },
+    "status": {
+      "type": "boolean",
+      "description": "true if Notruf erfolgt"
+    }
+  }
+}

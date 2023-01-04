@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+    php-apache-environment:
+        container_name: php-apache
+        build: ./
+        volumes:
+          - ./certificate/webserver.info.crt:/etc/ssl/certs/webserver.info.crt
+          - ./certificate/webserver.info.key:/etc/ssl/private/webserver.info.key
+          - ./seite/:/var/www/html/
+          - /home/projectuser/projectlp/:/var/www/html/res/
+        ports:
+          - 8443:443
+

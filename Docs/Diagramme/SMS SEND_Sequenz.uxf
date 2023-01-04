@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>370</x>
+      <y>210</y>
+      <w>850</w>
+      <h>890</h>
+    </coordinates>
+    <panel_attributes>title= SMS Send
+obj=:Controller ~a 
+obj= :SMSController ~b
+obj= :UDPServer ~c
+
+
+a-&gt;&gt;&gt;b : sendSMS(Msg) ; on=b
+
+
+
+combinedFragment=loop~loop1 b c; c:[0..2 | received "Datagram ok"]
+on= c;
+
+b-&gt;c : Datagram = Msg ; on=a; 
+c-&gt;b : Datagram= "Datagram ok" ;off= b;
+off=a; --=loop1;
+
+combinedFragment=alt~;
+id1:[received "Datagram ok"]
+c-&gt;lost: Send SMS;
+	combinedFragment=alt~;
+	id1:[SMS ok]
+	on= b; c-&gt;b: Datagram= "sms ok";
+	on=a; b.&gt;a: reply = true
+	..
+	id1:[10 Sec timeout &amp; NOT "sms ok"]
+	 b.&gt;a: reply = false
+	--
+
+
+
+..
+id1:[else]
+ b.&gt;a: reply = false
+--
+ 
+
+off= b; off=c; off=a;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1270</x>
+      <y>320</y>
+      <w>330</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Das Senden wird 3 Mal wiederholt, es sei
+denn der SMSController erhält "Datagramm ok" 
+vom UDPServer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1150</x>
+      <y>370</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;50.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1280</x>
+      <y>630</y>
+      <w>350</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Der SMSController wartet 10 Sekunden auf "sms ok",
+wenn keins kommt, dann wird false zurückgegeben</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1160</x>
+      <y>670</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;50.0;120.0;10.0</additional_attributes>
+  </element>
+</diagram>
