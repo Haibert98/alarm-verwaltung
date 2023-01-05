@@ -122,7 +122,7 @@ class AlarmVerwaltung:
             self.webTimer = self.getTimer()
         self.webTimer.start()           # Timer Starten
         
-        res = self.controller.sendAlarm(self.alarmDataJSON, self.link, self.tuerCode)  # Alarmieren
+        res = self.controller.sendAlarm(self.alarmDataJSON, self.link)  # Alarmieren
         print("Alarmierung erfolgreich: " + str(res))
         response = ""
         if res:

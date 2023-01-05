@@ -10,7 +10,7 @@ class Controller:
         self.smsCnt = SMSController()
         self.faxCnt = FAXController()
 
-    def sendAlarm(self, msgData, link, tuerCode):
+    def sendAlarm(self, msgData, link):
         sms = self.smsCnt.parseSMS(msgData, link)
         response = self.smsCnt.sendSMS(sms)
         
