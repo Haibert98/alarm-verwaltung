@@ -9,13 +9,18 @@
     "strasse",
     "hausnummer",
     "plz",
-    "ort"
+    "ort",
+    "update"
   ],
   "properties": {
+    "update":{
+      "type": "boolean",
+      "description": "false bei neuer Alarmierung, sonst true"
+    },
     "email": {
       "type": "string",
       "pattern": ".+\\@.+\\..+",
-      "description": "email Benutzer"      
+      "description": "email Benutzer"
     },
     "vorname": {
       "type": "string"
