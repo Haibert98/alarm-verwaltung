@@ -37,7 +37,7 @@ class AlarmVerwaltung:
         self.mqttMtx = Lock()                       # Mutex fuer Pruefung der Alarmierung
         self.mqttCV = Condition(lock=self.mqttMtx)  # Condition Variable mit Mutex
         self.alarmierungDa = False                  # Alarmierung reingekommen?
-        self.vorfallID = None                       # Unique ID
+        # self.vorfallID = None                       # Unique ID
         self.dataMqtt = None
         self.alarmDataJSON = None                       # Alarm Daten (Dict)
         self.tuerCodeDa = False                     # Variable fuers Blockieren
@@ -97,7 +97,7 @@ class AlarmVerwaltung:
                 self.dataMqtt = None
             else:
                 raise
-            if(self.vorfallID == self.alarmDataJSON["id"]):     #Update zum Vorfall
+            if self.alarmDataJSON["update"]:     #Update zum Vorfall
                 print("UPDATE")
                 self.updateData()        ## Update der Daten
             else:   
@@ -108,7 +108,7 @@ class AlarmVerwaltung:
         self.webTE.updateWebsite(self.alarmDataJSON)        # Update Website
     
     def startAlarm(self):
-        self.vorfallID = self.alarmDataJSON["id"]       # Neuer Vorfall
+        # self.vorfallID = self.alarmDataJSON["email"]       # Neuer Vorfall
         self.client.publish("signal/getTuerCode", payload= b'')
         while not self.tuerCodeDa:      # Warten auf TuerCode
             None

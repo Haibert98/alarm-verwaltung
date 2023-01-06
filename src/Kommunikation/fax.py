@@ -42,7 +42,7 @@ class FAXController:
     pdf.cell(200, 10, txt = "Weitere Informationen unter folgendem Link abrufbar:", ln=2, align="L")
     pdf.cell(200, 10, txt = link, ln=2, align="L")
     # save pdf with name
-    pdf.output("notfall_" + str(msg['id']) + ".pdf")
+    pdf.output("notfall_" + str(msg['email']) + ".pdf")
     
     return True
 
