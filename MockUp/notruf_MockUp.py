@@ -28,6 +28,7 @@ class notrufMock():
         # sleep(0.5)
         print("notruf geschickt")
         self.client.publish(topic="signal/notruf", payload='{\
+                                   "update": false,\
                                    "id":"test123@mail.com",\
                                    "vorname":"Peter",\
                                    "nachname":"Mustermann",  \

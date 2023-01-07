@@ -44,7 +44,7 @@ class AlarmVerwaltung:
         self.link = None                            # Link der Website
         self.response = ""
         #ToDo funktioniert das so mit subOrdner wegen Position und Bilder?
-        self.webTimer = None #Timer(3600.0, self.cleanUp) # Timer fuer Clean Up   (1 Std)
+        # self.webTimer = None #Timer(3600.0, self.cleanUp) # Timer fuer Clean Up   (1 Std)
         handlerThread = Thread(target=self.parseData, args=())
         mqttThread = Thread(target=self.client.loop_forever, args=())
         heartbeatThread = Thread(target=self.heartBeatDrawer, args=())
@@ -114,13 +114,13 @@ class AlarmVerwaltung:
             None
         self.link = self.webTE.createWebSite(self.alarmDataJSON, self.tuerCode)     # Erstellen der Website
         print(self.link)
-        if self.webTimer:
-            self.webTimer.cancel()
-            self.cleanUp()
-            self.webTimer = self.getTimer()
-        else:
-            self.webTimer = self.getTimer()
-        self.webTimer.start()           # Timer Starten
+        # if self.webTimer:
+        #     self.webTimer.cancel()
+        #     self.cleanUp()
+        #     self.webTimer = self.getTimer()
+        # else:
+        #     self.webTimer = self.getTimer()
+        # self.webTimer.start()           # Timer Starten
         
         res = self.controller.sendAlarm(self.alarmDataJSON, self.link, self.tuerCode)  # Alarmieren
         print("Alarmierung erfolgreich: " + str(res))
@@ -133,17 +133,17 @@ class AlarmVerwaltung:
         print(json.loads(response))
         self.client.publish(topic="signal/notruferfolgt", payload=self.response.encode("utf8"))                       # Ruckmeldung der Alarmierung
 
-    def cleanUp(self):
-        self.webTE.deleteWebsite()      # Website loeschen
-        if os.path.exists(self.picDir):    # Bilder loeschen
-            for file in os.listdir(self.picDir):
-                os.remove(os.path.join(self.picDir, file))
-        if os.path.exists(self.locDir):    # Karte loeschen
-            for file in os.listdir(self.locDir):
-                os.remove(os.path.join(self.locDir, file))
+    # def cleanUp(self):
+    #     self.webTE.deleteWebsite()      # Website loeschen
+    #     if os.path.exists(self.picDir):    # Bilder loeschen
+    #         for file in os.listdir(self.picDir):
+    #             os.remove(os.path.join(self.picDir, file))
+    #     if os.path.exists(self.locDir):    # Karte loeschen
+    #         for file in os.listdir(self.locDir):
+    #             os.remove(os.path.join(self.locDir, file))
 
-    def getTimer(self):
-        return Timer(3600.0, self.cleanUp)
+    # def getTimer(self):
+    #     return Timer(3600.0, self.cleanUp)
 
     def heartBeatDrawer(self):
         while True:

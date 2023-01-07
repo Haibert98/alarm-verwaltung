@@ -9,6 +9,7 @@ services:
           - ./certificate/webserver.info.key:/etc/ssl/private/webserver.info.key
           - ./seite/:/var/www/html/
           - /home/projectuser/projectlp/:/var/www/html/res/
+          - ../../fax/:/var/www/html/fax/
         ports:
           - 8443:443
 
